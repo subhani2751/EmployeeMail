@@ -1,0 +1,147 @@
+﻿@model EmployeeRegistration.Models.Empmodel
+@using System.Web
+@using System.Web.Optimization
+@using EmployeeRegistration.DAL;
+@using EmployeeRegistration.Models;
+
+@{
+    var empmodel = new Empmodel();
+    var data_Layer = new data_layer();
+    var slist = data_Layer.getdata("GetallStates");    //ViewData["statlelst"] as IEnumerable<SelectListItem>;
+    var Hobbieslist = data_Layer.getdata("GetallHobbies");
+    var Allemp_grid = data_Layer.Emp_All();//ViewData["Hobbieslst"] as IEnumerable<SelectListItem>;
+
+}
+
+<table align="center">
+    <tr>
+        <th colspan="2" align="center">Employee Register</th>
+    </tr>
+    <tr>
+        <td>Employee Name</td>
+        <td>@Html.TextBoxFor(model => model.sName)</td>
+        <td style="color:red" id="Nameval"></td>
+    </tr>
+    <tr>
+        <td>Phone No</td>
+        <td>@Html.TextBoxFor(model => model.iPhone, new { PlaceHolder = "Only Digits", type = "tel", pattern = "[0-9]*" })</td>
+        <td style="color:red" id="Phoneval"></td>
+    </tr>
+    <tr>
+        <td>Date of Birth</td>
+        <td style="display:flex;">
+            @Html.TextBoxFor(model => model.sdateofbirth, new { @class = "form-control datepicker", placeholder = "Select a date dd-mm-yy" })
+            <i class="fa fa-calendar" id="calendarIcon"></i> <!-- Font Awesome calendar icon -->
+        </td>
+        <td style="color:red" id="dateofbirthval"></td>
+    </tr>
+    <tr>
+        <td>State</td>
+        <td>@Html.DropDownListFor(model => model.sState, slist, "--Select any State--")</td>
+        <td style="color:red" id="Stateval"></td>
+    </tr>
+    <tr>
+        <td>City</td>
+        <td>@Html.DropDownListFor(model => model.sCity, Enumerable.Empty<SelectListItem>(), "--Select any City--")</td>
+        <td style="color:red" id="Cityval"></td>
+    </tr>
+    @*<tr>
+            <td>Designation</td>
+            <td>@Html.TextBoxFor(model => model.sDesignation)</td>
+            <td style="color:red" id="Designationval"></td>
+        </tr>
+        <tr>
+            <td>Deprtment</td>
+            <td></td>
+            <td style="color:red" id="Deprtmentval"></td>
+        </tr>*@
+    <tr>
+        <td>Email</td>
+        <td>@Html.TextBoxFor(model => model.sEmail)</td>
+        <td style="color:red" id="Emailval"></td>
+    </tr>
+    <tr>
+        <td>Hobbies</td>
+        <td>
+            @*@Html.DropDownListFor(model => model.sHobbies, Hobbieslist, new { style="width:200px;"})*@
+            @Html.ListBoxFor(model => model.sHobbies, Hobbieslist, new { @class = "multiselect" }) @*@columns = "40", ,@id= "sHobbies-enableClickableOptGroups"*@
+        </td>
+        <td style="color:red" id="Hobbiesval"></td>
+    </tr>
+    <tr>
+        <td>Qualification</td>
+        <td>
+            @Html.RadioButtonFor(model => model.sQualification, "1", new { id = "sscRadio" })SSC
+            @Html.RadioButtonFor(model => model.sQualification, "2", new { id = "interRadio" })Inter
+            @Html.RadioButtonFor(model => model.sQualification, "3", new { id = "degreeRadio" })Degree
+            @Html.RadioButtonFor(model => model.sQualification, "4", new { id = "btechRadio" })Btech
+            @Html.RadioButtonFor(model => model.sQualification, "5", new { id = "othersRadio" })Others  @*, new {@checked= "checked"}*@
+        </td>
+        <td style="color:red" id="Qualificationval"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><input type="button" name="save" value="save" onclick="SaveEmp()" /></td>
+        <td></td>
+    </tr>
+</table>
+
+<table id="EMPgrid" align="center" style="margin-top: 40px" border="1" cellpadding="10">
+    <tr id="EMPgridtr">
+        <th id="EMPgridth">Employee Name</th>
+        <th id="EMPgridth">Phone No</th>
+        <th id="EMPgridth">Date of Birth</th>
+        <th id="EMPgridth">State</th>
+        <th id="EMPgridth">City</th>
+        <th id="EMPgridth">Email</th>
+        <th id="EMPgridth">Hobbies</th>
+        <th id="EMPgridth">Qualification</th>
+        <th id="EMPgridth">Actions</th>
+    </tr>
+    @foreach (var item in Allemp_grid)
+    {
+        <tr id="EMPgridtr">
+            <td id="EMPgridtd">@item.sName</td>
+            <td id="EMPgridtd">@item.iPhone</td>
+            <td id="EMPgridtd">@item.sdateofbirth</td>
+            <td id="EMPgridtd">@item.sState</td>
+            <td id="EMPgridtd">@item.sCity</td>
+            <td id="EMPgridtd">@item.sEmail</td>
+            <td id="EMPgridtd">@item.sHobbies</td>
+            <td id="EMPgridtd">@item.sQualification</td>
+            <td id="EMPgridtd">
+                @Html.ActionLink("Delete", "Delete", new { id = item.iMasteriD })
+                |
+                @Html.ActionLink("Edit", "Edit", new { id = item.iMasteriD })
+            </td>
+        </tr>
+    }
+</table>
+
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/sumoselectjs")
+@Scripts.Render("~/bundles/datatablejs")
+
+
+@Styles.Render("~/bundles/themes")
+@Styles.Render("~/bundles/callogo")
+@Styles.Render("~/bundles/sumoselectcss")
+@Styles.Render("~/bundles/datatablecss")
+<script src="~/Scripts/employeevalidations.js"></script>
+
+<style>
+    /*#EMPgrid, #EMPgridth, #EMPgridtd {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }*/
+    table, th, td {
+        border-collapse: collapse;
+    }
+    /*#EMPgridth, #EMPgridtd*/ /*td {
+        padding: 5px;
+    }*/
+</style>
+
