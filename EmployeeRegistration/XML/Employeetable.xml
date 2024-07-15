@@ -1,20 +1,180 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <root>
 	<DBobject>
-		<Name><![CDATA[dbo.NewTable]]></Name>
+		<Name><![CDATA[dbo.states]]></Name>
 		<Type><![CDATA[Table]]></Type>
 		<CreationDate><![CDATA[11/07/2024 10:40]]></CreationDate>
 		<author><![CDATA[Subhani]]></author>
 		<UpgradeScript>
 			<![CDATA[
-			IF Not Exists(select * from sys.tables where name ='employee')
+			IF Not Exists(select * from sys.tables where name ='states')
 			Begin
-				create table employee
-				(
-				 id int identity(1,1),
-				 Name nvarchar(max) not null
-				)
+				CREATE TABLE [dbo].[states](
+				[stateId] [int] IDENTITY(1,1) NOT NULL,
+				[stateName] [varchar](max) NULL
+						)
+				End
+			]]>
+		</UpgradeScript>
+	</DBobject>
+	<DBobject>
+		<Name><![CDATA[dbo.Hobbies]]></Name>
+		<Type><![CDATA[Table]]></Type>
+		<CreationDate><![CDATA[11/07/2024 10:40]]></CreationDate>
+		<author><![CDATA[Subhani]]></author>
+		<UpgradeScript>
+			<![CDATA[
+			IF Not Exists(select * from sys.tables where name ='Hobbies')
+			Begin
+				CREATE TABLE [dbo].[Hobbies](
+					[HobbieID] [int] IDENTITY(1,1) NOT NULL,
+					[HobbieName] [varchar](max) NULL,
+					) 
 			End
-		]]></UpgradeScript>
+		]]>
+		</UpgradeScript>
+	</DBobject>
+	<DBobject>
+		<Name><![CDATA[dbo.EMP]]></Name>
+		<Type><![CDATA[Table]]></Type>
+		<CreationDate><![CDATA[11/07/2024 10:40]]></CreationDate>
+		<author><![CDATA[Subhani]]></author>
+		<UpgradeScript>
+			<![CDATA[
+			IF Not Exists(select * from sys.tables where name ='EMP')
+			Begin
+			CREATE TABLE [dbo].[EMP](
+				[iMasterId] [int] IDENTITY(1,1) NOT NULL,
+				[sName] [varchar](max) NULL,
+				[biPhone] [bigint] NULL,
+				[sEmail] [varchar](max) NULL,
+				[sdateofbirth] [date] NULL,
+				[CityId] [int] NULL,
+				[StateId] [int] NULL,
+				[iQualification] [int] NULL,
+				[sHobbies] [varchar](max) NULL,
+						) 
+			End
+		]]>
+		</UpgradeScript>
+	</DBobject>
+	<DBobject>
+		<Name><![CDATA[dbo.citys]]></Name>
+		<Type><![CDATA[Table]]></Type>
+		<CreationDate><![CDATA[11/07/2024 10:40]]></CreationDate>
+		<author><![CDATA[Subhani]]></author>
+		<UpgradeScript>
+			<![CDATA[
+			IF Not Exists(select * from sys.tables where name ='citys')
+			Begin
+			CREATE TABLE [dbo].[citys](
+				[cityId] [int] IDENTITY(1,1) NOT NULL,
+				[cityName] [varchar](max) NULL,
+				[stateId] [int] NULL,
+			) 
+			End
+		]]>
+		</UpgradeScript>
+	</DBobject>
+	<DBobject>
+		<Name><![CDATA[dbo.emp_save]]></Name>
+		<Type><![CDATA[sp]]></Type>
+		<CreationDate><![CDATA[11/07/2024 10:40]]></CreationDate>
+		<author><![CDATA[Subhani]]></author>
+		<UpgradeScript>
+			<![CDATA[
+			IF Not Exists(select * from sys.procedures where object_id=OBJECT_ID('emp_save'))
+			Begin
+			create procedure [dbo].[emp_save](
+			@sname varchar(max),
+			@biPhone bigint,
+			@sEmail varchar(max),
+			@sdateofbirth date,
+			@CityId int,
+			@StateId int,
+			@iQualification int ,
+			@sHobbies varchar(max)
+			)
+			as
+			begin
+			 insert into EMP values(@sname,@biPhone,@sEmail,@sdateofbirth,@CityId,@StateId,@iQualification,@sHobbies)
+				end
+			End
+		]]>
+		</UpgradeScript>
+	</DBobject>
+	<DBobject>
+		<Name><![CDATA[dbo.GetCitys]]></Name>
+		<Type><![CDATA[sp]]></Type>
+		<CreationDate><![CDATA[11/07/2024 10:40]]></CreationDate>
+		<author><![CDATA[Subhani]]></author>
+		<UpgradeScript>
+			<![CDATA[
+			IF Not Exists(select * from sys.procedures where object_id=OBJECT_ID('GetCitys'))
+			Begin
+			create procedure [dbo].[GetCitys](@Id int)
+			As
+			begin
+			select cityId,cityName from citys where stateId=@Id;
+			end
+			End
+		]]>
+		</UpgradeScript>
+	</DBobject>
+	<DBobject>
+		<Name><![CDATA[dbo.GetallStates]]></Name>
+		<Type><![CDATA[sp]]></Type>
+		<CreationDate><![CDATA[11/07/2024 10:40]]></CreationDate>
+		<author><![CDATA[Subhani]]></author>
+		<UpgradeScript>
+			<![CDATA[
+		IF Not Exists(select * from sys.procedures where object_id=OBJECT_ID('GetallStates'))
+		Begin
+		create procedure [dbo].[GetallStates]
+		As
+		begin
+		select * from states;
+		end
+			End
+		]]>
+		</UpgradeScript>
+	</DBobject>
+	<DBobject>
+		<Name><![CDATA[dbo.GetallHobbies]]></Name>
+		<Type><![CDATA[sp]]></Type>
+		<CreationDate><![CDATA[11/07/2024 10:40]]></CreationDate>
+		<author><![CDATA[Subhani]]></author>
+		<UpgradeScript>
+			<![CDATA[
+		IF Not Exists(select * from sys.procedures where object_id=OBJECT_ID('GetallHobbies'))
+		Begin
+		create procedure [dbo].[GetallHobbies]
+		As
+		begin
+		select * from Hobbies;
+		end
+			End
+		]]>
+		</UpgradeScript>
+	</DBobject>
+	<DBobject>
+		<Name><![CDATA[dbo.GetAll_Emp]]></Name>
+		<Type><![CDATA[sp]]></Type>
+		<CreationDate><![CDATA[11/07/2024 10:40]]></CreationDate>
+		<author><![CDATA[Subhani]]></author>
+		<UpgradeScript>
+			<![CDATA[
+			IF Not Exists(select * from sys.procedures where object_id=OBJECT_ID('GetAll_Emp'))
+			Begin
+				CREATE procedure [dbo].[GetAll_Emp]
+				As
+				begin
+				select e.iMasterId,e.sName,e.biPhone,e.sEmail,e.sdateofbirth,c.cityName,s.stateName,e.iQualification,e.sHobbies 
+				from EMP e inner join states s on e.StateId=s.StateId
+				inner join citys c on c.cityId =e.CityId;
+				end
+			End
+		]]>
+		</UpgradeScript>
 	</DBobject>
 </root>
