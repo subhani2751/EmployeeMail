@@ -177,7 +177,8 @@ function SaveEmp() {
                 url: 'EMP/EmpSave',  //'@Url.Action("GetCities", "EMP")'
                 type: 'Post',
                 // datatype:"json",
-                data: obj,// "stateid=" + stateid,//JSON.stringify({ stateid: stateid }),
+                data: obj,
+                //data: JSON.stringify(obj),// "stateid=" + stateid,//JSON.stringify({ stateid: stateid }),
                 success: function (data) {
                     var EMPgrid = $('#EMPgrid');
                     $.each(data, function (index, record) {

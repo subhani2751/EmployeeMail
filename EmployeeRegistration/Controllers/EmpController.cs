@@ -28,10 +28,11 @@ namespace EmployeeRegistration.Controllers
             List<SelectListItem> GetCities = data_Layer.getCitys(stateid);
             return Json(GetCities, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult EmpSave(Empmodel model=null)
+        [HttpPost]
+        public JsonResult EmpSave(Empmodel model =null)
         {
-           var empmodels = data_Layer.EMP_Save(model);
-            return Json(empmodels, JsonRequestBehavior.AllowGet);
+          // var empmodels = data_Layer.EMP_Save(model);
+            return Json(0, JsonRequestBehavior.AllowGet);
         }
     }
 }

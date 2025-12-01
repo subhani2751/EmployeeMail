@@ -5,7 +5,11 @@ using System.Web;
 
 namespace EmployeeRegistration.Models
 {
-    public class Empmodel
+    public class EmployeeInstance
+    {
+        public int Version { get; set; }
+    }
+    public class Empmodel : EmployeeInstance
     {
         public int iMasteriD { get; set; }
         public string sName { get; set; }

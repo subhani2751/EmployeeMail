@@ -67,7 +67,6 @@ C:\Users\subha\source\repos\EmployeeRegistration\EmployeeRegistration\bin\System
 C:\Users\subha\source\repos\EmployeeRegistration\EmployeeRegistration\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\subha\source\repos\EmployeeRegistration\EmployeeRegistration\obj\Debug\EmployeeRegistration.csproj.AssemblyReference.cache
 C:\Users\subha\source\repos\EmployeeRegistration\EmployeeRegistration\obj\Debug\EmployeeRegistration.csproj.CoreCompileInputs.cache
-C:\Users\subha\source\repos\EmployeeRegistration\EmployeeRegistration\obj\Debug\EmployeeRegistration.csproj.CopyComplete
 C:\Users\subha\source\repos\EmployeeRegistration\EmployeeRegistration\obj\Debug\EmployeeRegistration.dll
 C:\Users\subha\source\repos\EmployeeRegistration\EmployeeRegistration\obj\Debug\EmployeeRegistration.pdb
 C:\Users\subha\source\repos\EmployeeRegistration\EmployeeRegistration\bin\Antlr3.Runtime.dll
@@ -77,3 +76,4 @@ C:\Users\subha\source\repos\EmployeeRegistration\EmployeeRegistration\bin\WebGre
 C:\Users\subha\source\repos\EmployeeRegistration\EmployeeRegistration\bin\Antlr3.Runtime.pdb
 C:\Users\subha\source\repos\EmployeeRegistration\EmployeeRegistration\bin\Newtonsoft.Json.xml
 C:\Users\subha\source\repos\EmployeeRegistration\EmployeeRegistration\bin\System.Web.Optimization.xml
+C:\Users\subha\source\repos\EmployeeRegistration\EmployeeRegistration\obj\Debug\Employee.2760B94E.Up2Date
